@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>我的工具</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08090b; --ink: #f4f4f5; --muted: #8b8d98; --dim: #5d5f69;
+  --line: rgba(255, 255, 255, .08); --line-strong: rgba(255, 255, 255, .16);
+  --card: rgba(255, 255, 255, .035); --card-hover: rgba(255, 255, 255, .055);
+  --accent: #7c9cff; --accent-soft: rgba(124, 156, 255, .14);
+  --ok: #3ee0a0; --info: #7c9cff; --idle: #8b8d98; --warn: #ffc24a; --bad: #ff5e5e;
+  --sans: "Inter", "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body {
+  margin: 0; background: transparent; color: var(--ink); min-height: 100vh;
+  font: 15px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body::before {  /* 頂部柔光 */
+  content: ""; position: fixed; inset: -20vh -10vw auto; height: 60vh; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 60% 70% at 30% 0%, rgba(124, 156, 255, .16), transparent 70%);
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding: 48px 24px 80px; }
+header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 36px; }
+h1 { margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -.02em; }
+.sub { color: var(--muted); margin-top: 4px; font-size: 14px; }
+.meta { display: flex; align-items: center; gap: 12px; color: var(--dim); font: 12px var(--mono); }
+button, .btn {
+  font: 500 13px var(--sans); color: var(--ink); background: var(--card); border: 1px solid var(--line-strong);
+  border-radius: 8px; padding: 6px 12px; cursor: pointer; text-decoration: none; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px; transition: background .15s, border-color .15s;
+}
+button:hover, .btn:hover { background: var(--card-hover); border-color: rgba(255, 255, 255, .28); }
+button.primary { background: var(--accent-soft); border-color: rgba(124, 156, 255, .45); color: #c9d6ff; }
+button.primary:hover { background: rgba(124, 156, 255, .24); }
+button:disabled { opacity: .5; cursor: default; }
+
+h2 { font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: .08em; margin: 36px 0 14px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+  display: flex; flex-direction: column; gap: 14px; min-width: 0;
+}
+.card:hover { border-color: var(--line-strong); }
+.head { display: flex; align-items: flex-start; gap: 12px; }
+.icon { font-size: 26px; line-height: 1; width: 40px; height: 40px; display: grid; place-items: center;
+  background: rgba(255, 255, 255, .05); border-radius: 10px; flex: none; }
+.name { font-size: 17px; font-weight: 600; }
+.purpose { color: var(--muted); font-size: 14px; margin-top: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 12px; padding: 2px 9px 2px 8px; border-radius: 99px; border: 1px solid var(--line-strong);
+  display: inline-flex; align-items: center; gap: 6px; color: #d4d4d8; }
+.chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--c); }
+.chip.ok { --c: var(--ok); } .chip.info { --c: var(--info); } .chip.idle { --c: var(--idle); }
+.chip.warn { --c: var(--warn); } .chip.bad { --c: var(--bad); border-color: rgba(255, 94, 94, .5); color: #ffc9c9; }
+.hint { font-size: 13px; color: #ffc9c9; background: rgba(255, 94, 94, .08); border: 1px solid rgba(255, 94, 94, .25);
+  border-radius: 8px; padding: 8px 10px; }
+.row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.label { font-size: 12px; color: var(--dim); width: 44px; flex: none; }
+.path { font: 12px var(--mono); color: #c4c4cc; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  flex: 1; min-width: 0; direction: rtl; text-align: left; }  /* 路徑太長時保留尾端 */
+.links { display: flex; flex-wrap: wrap; gap: 6px; }
+.links .btn { font-size: 12px; padding: 4px 10px; }
+.sched { font-size: 13px; color: var(--muted); }
+.actions { display: flex; gap: 8px; margin-top: auto; padding-top: 4px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.skills { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+th { text-align: left; font-weight: 500; font-size: 12px; color: var(--dim); padding: 12px 16px; border-bottom: 1px solid var(--line); }
+td { padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td .t { font-weight: 600; } td .n { font: 11px var(--mono); color: var(--dim); }
+td.p { color: var(--muted); }
+.say { font-size: 13px; color: #c9d6ff; background: var(--accent-soft); border-radius: 6px; padding: 2px 8px;
+  cursor: pointer; border: 0; display: inline-block; }
+.say:hover { background: rgba(124, 156, 255, .24); }
+.note { color: var(--dim); font-size: 13px; margin: 10px 2px 0; }
+
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); opacity: 0;
+  background: #1b1c21; border: 1px solid var(--line-strong); padding: 8px 16px; border-radius: 8px; font-size: 13px;
+  transition: .2s; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateX(-50%); }
+.err { color: var(--bad); }
+
+@media (max-width: 640px) {
+  .wrap { padding: 28px 16px 60px; }
+  .grid { grid-template-columns: 1fr; }
+  .skills thead { display: none; }
+  .skills tr { display: block; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .skills td { display: block; padding: 2px 0; border: 0; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>我的工具</h1>
+      <div class="sub">自己做的工具都在這裡：用途、資料夾、網址和目前狀態。</div>
+    </div>
+    <div class="meta"><span id="gen">載入中…</span><button id="refresh">重新檢查</button></div>
+  </header>
+  <main id="main"></main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>window.HUB_DATA = {"generated": "2026-09-26 11:07:51", "tools": [{"name": "AI 新聞看板", "icon": "📰", "group": "資訊看板", "purpose": "每天抓 OpenAI、Anthropic、Google 等 AI 新聞，用免費翻譯轉成中文，不耗 token。", "schedule": "雲端每天 08:00 自動更新；本機排程每天 08:00", "links": [{"label": "雲端版", "url": "https://beibeing1218.github.io/ai-news/"}, {"label": "GitHub", "url": "https://github.com/beibeing1218/ai-news"}]}, {"name": "音量刻度小工具", "icon": "🔊", "group": "桌面小工具", "purpose": "工作列顯示音量數字，左鍵一鍵切換預設音量，中鍵靜音，右鍵編輯刻度。", "schedule": "開機自動啟動，常駐工作列", "links": [{"label": "GitHub（私人）", "url": "https://github.com/beibeing1218/VolumePresets"}]}]};</script>
+<script>
+const $ = s => document.querySelector(s);
+// 雲端版（hub.py publish 產生）會把清單直接嵌在頁面裡，沒有本機伺服器可問狀態
+const STATIC = window.HUB_DATA || null;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast.timer); toast.timer = setTimeout(() => t.classList.remove("show"), 1800);
+}
+async function copy(text, what) {
+  try { await navigator.clipboard.writeText(text); toast(`已複製${what}`); }
+  catch { toast("複製失敗"); }
+}
+async function act(action, id, label) {
+  const r = await fetch(`/api/${action}/${id}`, { method: "POST", headers: { "X-Hub": "1" } });
+  toast(r.ok ? label : "失敗：" + ((await r.json().catch(() => ({}))).error || r.status));
+  if (r.ok && action === "launch") setTimeout(load, 2500);
+}
+
+function card(t) {
+  const head = `<div class="head"><div class="icon">${esc(t.icon)}</div>
+      <div><div class="name">${esc(t.name)}</div><div class="purpose">${esc(t.purpose)}</div></div></div>`;
+  const links = `<div class="row"><span class="label">網址</span><div class="links">${t.links.map(l =>
+      `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}</div></div>`;
+  const sched = `<div class="sched">⏱ ${esc(t.schedule)}</div>`;
+  if (STATIC) return `<article class="card">${head}${t.links.length ? links : ""}${sched}</article>`;
+  const hints = t.status.filter(s => s.hint).map(s => `<div class="hint">${esc(s.hint)}</div>`).join("");
+  return `<article class="card">
+    ${head}
+    <div class="chips">${t.status.map(s => `<span class="chip ${s.level}">${esc(s.text)}</span>`).join("")}</div>
+    ${hints}
+    <div class="row"><span class="label">資料夾</span><span class="path" title="${esc(t.folder)}"><bdi>${esc(t.folder)}</bdi></span>
+      <button data-copy="${esc(t.folder)}" data-what="路徑">複製</button></div>
+    ${links}
+    ${sched}
+    <div class="actions">
+      <button data-act="open" data-id="${esc(t.id)}" data-label="已開啟資料夾">開啟資料夾</button>
+      ${t.can_launch ? `<button class="primary" data-act="launch" data-id="${esc(t.id)}" data-label="已啟動 ${esc(t.name)}">啟動</button>` : ""}
+    </div>
+  </article>`;
+}
+
+function skillsTable(skills) {
+  return `<div class="skills"><table>
+    <thead><tr><th>Skill</th><th>做什麼</th><th>跟 Claude 說（點一下複製）</th></tr></thead>
+    <tbody>${skills.map(s => `<tr>
+      <td><div class="t">${esc(s.title)}</div><div class="n">${esc(s.name)}</div></td>
+      <td class="p">${esc(s.purpose)}</td>
+      <td>${s.say.split("／").map(w => `<button class="say" data-copy="${esc(w)}" data-what="觸發語">${esc(w)}</button>`).join(" ")}</td>
+    </tr>`).join("")}</tbody></table></div>
+    <p class="note">這些 skill 存在 Claude 帳號裡，沒有本機資料夾；在 Claude 對話中講觸發語就會用到。</p>`;
+}
+
+async function load() {
+  $("#refresh").disabled = true;
+  try {
+    const d = STATIC || await (await fetch("/api/tools", { cache: "no-store" })).json();
+    const groups = [...new Set(d.tools.map(t => t.group))];
+    $("#main").innerHTML = groups.map(g =>
+      `<h2>${esc(g)}</h2><div class="grid">${d.tools.filter(t => t.group === g).map(card).join("")}</div>`
+    ).join("") + (d.skills?.length ? `<h2>CLAUDE 公務 SKILLS</h2>` + skillsTable(d.skills) : "");
+    $("#gen").textContent = (STATIC ? "更新於 " : "檢查時間 ") + d.generated.slice(5, 16);
+  } catch (e) {
+    $("#main").innerHTML = `<p class="err">讀不到工具清單：${esc(e.message)}</p>`;
+  }
+  $("#refresh").disabled = false;
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-copy],[data-act]");
+  if (!b) return;
+  if (b.dataset.copy) copy(b.dataset.copy, b.dataset.what);
+  else act(b.dataset.act, b.dataset.id, b.dataset.label);
+});
+$("#refresh").addEventListener("click", load);
+if (STATIC) {
+  $("#refresh").remove();
+  $(".sub").textContent = "自己做的工具都在這裡：用途、網址和更新時間。";
+}
+load();
+</script>
+</body>
+</html>
