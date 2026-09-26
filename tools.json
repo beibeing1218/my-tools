@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-26 13:10:55",
+  "generated": "2026-09-26 14:17:52",
   "tools": [
     {
       "name": "AI 新聞看板",
@@ -15,6 +15,23 @@
         {
           "label": "GitHub",
           "url": "https://github.com/beibeing1218/ai-news"
+        }
+      ]
+    },
+    {
+      "name": "每日英文",
+      "icon": "📖",
+      "group": "學習",
+      "purpose": "每天一篇英文新聞（依星期換類別）的摘要與難字解析，可加入生字簿、用間隔重複複習。不耗 token。",
+      "schedule": "雲端每天 07:00 自動更新；生字簿存在加入生字的那個瀏覽器",
+      "links": [
+        {
+          "label": "網站",
+          "url": "https://beibeing1218.github.io/daily-english/"
+        },
+        {
+          "label": "GitHub",
+          "url": "https://github.com/beibeing1218/daily-english"
         }
       ]
     },
