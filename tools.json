@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-26 12:19:27",
+  "generated": "2026-09-26 13:10:55",
   "tools": [
     {
       "name": "AI 新聞看板",
@@ -36,8 +36,13 @@
       "icon": "🖼️",
       "group": "桌面小工具",
       "purpose": "從 WALLPAPER 素材資料夾挑主題、設定輪替間隔，自動換桌布。左鍵開面板，中鍵換下一張，右鍵更多設定。",
-      "schedule": "常駐工作列，依設定的間隔換圖",
-      "links": []
+      "schedule": "開機自動啟動，常駐工作列，依設定的間隔換圖",
+      "links": [
+        {
+          "label": "GitHub（私人）",
+          "url": "https://github.com/beibeing1218/WallpaperRotator"
+        }
+      ]
     }
   ]
 }
