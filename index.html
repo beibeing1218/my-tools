@@ -112,7 +112,7 @@ td.p { color: var(--muted); }
 </div>
 <div class="toast" id="toast"></div>
 
-<script>window.HUB_DATA = {"generated": "2026-09-26 11:07:51", "tools": [{"name": "AI 新聞看板", "icon": "📰", "group": "資訊看板", "purpose": "每天抓 OpenAI、Anthropic、Google 等 AI 新聞，用免費翻譯轉成中文，不耗 token。", "schedule": "雲端每天 08:00 自動更新；本機排程每天 08:00", "links": [{"label": "雲端版", "url": "https://beibeing1218.github.io/ai-news/"}, {"label": "GitHub", "url": "https://github.com/beibeing1218/ai-news"}]}, {"name": "音量刻度小工具", "icon": "🔊", "group": "桌面小工具", "purpose": "工作列顯示音量數字，左鍵一鍵切換預設音量，中鍵靜音，右鍵編輯刻度。", "schedule": "開機自動啟動，常駐工作列", "links": [{"label": "GitHub（私人）", "url": "https://github.com/beibeing1218/VolumePresets"}]}]};</script>
+<script>window.HUB_DATA = {"generated": "2026-09-26 11:09:17", "tools": [{"name": "AI 新聞看板", "icon": "📰", "group": "資訊看板", "purpose": "每天抓 OpenAI、Anthropic、Google 等 AI 新聞，用免費翻譯轉成中文，不耗 token。", "schedule": "雲端每天 08:00 自動更新；本機排程每天 08:00", "links": [{"label": "雲端版", "url": "https://beibeing1218.github.io/ai-news/"}, {"label": "GitHub", "url": "https://github.com/beibeing1218/ai-news"}]}, {"name": "音量刻度小工具", "icon": "🔊", "group": "桌面小工具", "purpose": "工作列顯示音量數字，左鍵一鍵切換預設音量，中鍵靜音，右鍵編輯刻度。", "schedule": "開機自動啟動，常駐工作列", "links": [{"label": "GitHub（私人）", "url": "https://github.com/beibeing1218/VolumePresets"}]}]};</script>
 <script>
 const $ = s => document.querySelector(s);
 // 雲端版（hub.py publish 產生）會把清單直接嵌在頁面裡，沒有本機伺服器可問狀態
@@ -190,7 +190,7 @@ document.addEventListener("click", e => {
 });
 $("#refresh").addEventListener("click", load);
 if (STATIC) {
-  $("#refresh").remove();
+  $("#refresh").hidden = true;
   $(".sub").textContent = "自己做的工具都在這裡：用途、網址和更新時間。";
 }
 load();
