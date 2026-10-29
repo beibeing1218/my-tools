@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-26 14:17:52",
+  "generated": "2026-10-29 23:02:58",
   "tools": [
     {
       "name": "AI 新聞看板",
@@ -60,6 +60,14 @@
           "url": "https://github.com/beibeing1218/WallpaperRotator"
         }
       ]
+    },
+    {
+      "name": "網速健檢",
+      "icon": "📶",
+      "group": "電腦診斷",
+      "purpose": "覺得網路慢時點一下，約 70 秒分段測區網、中華電信、國際線路、DNS、國外網站、LoL／Steam 和各地下載速度，產生報告並指出慢在哪一段。不常駐、不耗 token。",
+      "schedule": "手動執行（桌面「工具」資料夾的「網速健檢」捷徑）",
+      "links": []
     }
   ]
 }
