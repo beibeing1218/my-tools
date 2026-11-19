@@ -1,6 +1,19 @@
 {
-  "generated": "2026-10-29 23:02:58",
+  "generated": "2026-11-19 18:07:05",
   "tools": [
+    {
+      "name": "Panasonic 補貨監看",
+      "icon": "📷",
+      "group": "小工具",
+      "purpose": "每分鐘檢查 Panasonic 官網 DC-L10-N 庫存，有貨就跳通知、響鈴並開商品頁。",
+      "schedule": "工作排程器 PanaStockCheck 每分鐘",
+      "links": [
+        {
+          "label": "商品頁",
+          "url": "https://pstw.panasonic.com.tw/Shop/product/detail/M9D2AKWZQESS0A0AFHXO/DC-L10-N"
+        }
+      ]
+    },
     {
       "name": "AI 新聞看板",
       "icon": "📰",
