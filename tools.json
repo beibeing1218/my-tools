@@ -1,16 +1,20 @@
 {
-  "generated": "2026-11-19 18:07:05",
+  "generated": "2026-11-21 14:33:49",
   "tools": [
     {
       "name": "Panasonic 補貨監看",
       "icon": "📷",
       "group": "小工具",
-      "purpose": "每分鐘檢查 Panasonic 官網 DC-L10-N 庫存，有貨就跳通知、響鈴並開商品頁。",
-      "schedule": "工作排程器 PanaStockCheck 每分鐘",
+      "purpose": "每兩分鐘檢查 Panasonic 官網 DC-L10-N／DC-L10-S 庫存，有貨就跳通知、響鈴並開商品頁。",
+      "schedule": "工作排程器 PanaStockCheck 每兩分鐘",
       "links": [
         {
-          "label": "商品頁",
+          "label": "DC-L10-N",
           "url": "https://pstw.panasonic.com.tw/Shop/product/detail/M9D2AKWZQESS0A0AFHXO/DC-L10-N"
+        },
+        {
+          "label": "DC-L10-S",
+          "url": "https://pstw.panasonic.com.tw/Shop/product/detail/LN1M3XBM88PFKC856ZLG/DC-L10-S"
         }
       ]
     },
